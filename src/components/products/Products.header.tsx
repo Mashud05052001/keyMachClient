@@ -22,8 +22,9 @@ type TFilter = {
 
 const ProductsHeaderSection = () => {
   const [query, setQuery] = useState<Record<string, unknown>>({});
-  const { register, handleSubmit } = useForm<TFilter>();
+  const { register, handleSubmit, reset: filterReset } = useForm<TFilter>();
   const { data } = useGetAllProductsQuery(query);
+
   let productsCount = 0;
   if (data?.success) {
     productsCount = data.data.length;
@@ -62,19 +63,21 @@ const ProductsHeaderSection = () => {
       setQuery({ ...othersQuery, ...filterData });
     }
   };
+
   const handleResetFilter = () => {
     const { filter, sort, ...othersQuery } = query;
     setQuery({ ...othersQuery });
+    filterReset();
   };
   return (
     <div className="flex justify-between items-center relative">
-      <div className="absolute bg-red-400 w-screen top-40 grid grid-cols-4">
+      {/* <div className="absolute bg-red-400 w-screen top-40 grid grid-cols-4">
         {data?.data.map((item: TProduct) => (
-          <div>
+          <div key={item._id}>
             {item.name} = {item.price}
           </div>
         ))}
-      </div>
+      </div> */}
       {/* Count of products */}
       <div>
         <h3 className="text-lg font-semibold pl-3">
@@ -188,7 +191,3 @@ const ProductsHeaderSection = () => {
 };
 
 export default ProductsHeaderSection;
-
-{
-  /* <input type="email" class="flex h-10 w-full rounded-md border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 rounded-r-none border-4 outline-dotted" placeholder="Email">flex */
-}

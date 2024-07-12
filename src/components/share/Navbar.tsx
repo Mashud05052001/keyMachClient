@@ -5,9 +5,12 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { NavLink } from "react-router-dom";
 import "@/styles/navbar.style.css";
+import { useAppSelector } from "@/redux/hooks";
+import { getCartCounts } from "@/redux/features/cart/cartSlice";
 
 const Navbar = () => {
   const [dropDownState, setDropDownState] = useState(false);
+  const totalCartItems = useAppSelector(getCartCounts);
   const dropDownMenuRef = useRef<HTMLDivElement>(null);
   const navbarItems = generateNavbarItems();
   const lastNavbarItems = navbarItems[navbarItems.length - 1];
@@ -63,7 +66,7 @@ const Navbar = () => {
             <Button variant={"ghost"} className=" relative">
               <ShoppingBagIcon className="size-6 text-black" />
               <span className="w-5 h-5 flex items-center justify-center absolute right-2 text-xs bottom-0 bg-common-700 text-white rounded-full p-0.5 bg-opacity-90">
-                99
+                {totalCartItems}
               </span>
             </Button>
           </NavLink>
