@@ -9,6 +9,6 @@ import { Toaster } from "sonner";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
     <RouterProvider router={router} />
-    <Toaster position="top-right" duration={1300} />
+    <Toaster position="top-right" duration={2000} />
   </Provider>
 );

@@ -1,16 +1,7 @@
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import CommonMarginTopContainer from "@/components/container/CommonMarginTopContainer";
+import Modal from "@/components/modal/Modal";
 import SingleProductSkeleton from "@/components/skeleton/SingleProductSkeleton";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import { addCartItem } from "@/redux/features/cart/cartSlice";
 import { useGetSingleProductQuery } from "@/redux/features/product/productApi";
 import { useAppDispatch } from "@/redux/hooks";
@@ -49,7 +40,14 @@ const SingleProduct = () => {
   }
 
   const handleAddTOCart = async () => {
-    dispatch(addCartItem({ _id: productData?._id }));
+    const cartItem = {
+      _id: productData?._id,
+      name: productData?.name,
+      image: productData?.image,
+      price: productData?.price,
+      availableQuantity: productData?.quantity,
+    };
+    dispatch(addCartItem(cartItem));
     toast.success("Item added successfully");
   };
 
@@ -95,30 +93,16 @@ const SingleProduct = () => {
           </div>
           {/* Add To Cart */}
           <div className="pt-5">
-            <AlertDialog>
-              <AlertDialogTrigger>
-                <PrimaryButton
-                  buttonText="Add To Cart"
-                  disabled={productData?.quantity === 0}
-                ></PrimaryButton>
-              </AlertDialogTrigger>
-              <AlertDialogContent className="w-96">
-                <AlertDialogHeader>
-                  <AlertDialogTitle>
-                    Confirm adding product to cart?
-                  </AlertDialogTitle>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction
-                    className="bg-common-800/80 hover:bg-common-700"
-                    onClick={handleAddTOCart}
-                  >
-                    ADD
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+            <Modal
+              mainQuestionText="Confirm adding product to cart?"
+              permitButtonText="ADD"
+              permitButtonHandler={handleAddTOCart}
+            >
+              <PrimaryButton
+                buttonText="Add To Cart"
+                disabled={productData?.quantity === 0}
+              ></PrimaryButton>
+            </Modal>
           </div>
         </div>
       </div>

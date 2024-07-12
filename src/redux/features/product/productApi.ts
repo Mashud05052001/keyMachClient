@@ -22,6 +22,7 @@ const productApi = baseApi.injectEndpoints({
     }),
     getSingleProduct: builder.query({
       query: (id: string) => {
+        if (id === "") return "";
         return {
           url: `/products/${id}`,
           method: "GET",

@@ -1,12 +1,12 @@
+import { Button } from "@/components/ui/button";
+import { getCartCounts } from "@/redux/features/cart/cartSlice";
+import { useAppSelector } from "@/redux/hooks";
+import "@/styles/navbar.style.css";
 import { generateNavbarItems } from "@/utils/generateDynamicRoutesNavbar";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { Divide as Hamburger } from "hamburger-react";
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
 import { NavLink } from "react-router-dom";
-import "@/styles/navbar.style.css";
-import { useAppSelector } from "@/redux/hooks";
-import { getCartCounts } from "@/redux/features/cart/cartSlice";
 
 const Navbar = () => {
   const [dropDownState, setDropDownState] = useState(false);
@@ -31,7 +31,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="flex items-center justify-between bg-gray py-2 text-black-600">
+    <nav className="flex items-center justify-between bg-gray py-2 text-black-600 bg-common-100">
       {/* Logo */}
       <NavLink to={""}>
         <div className="scale-100 cursor-pointer rounded-2xl px-3 py-2 font-semibold text-black-700 transition-all duration-200 hover:scale-110">
@@ -65,7 +65,11 @@ const Navbar = () => {
           <NavLink to={"/cart"}>
             <Button variant={"ghost"} className=" relative">
               <ShoppingBagIcon className="size-6 text-black" />
-              <span className="w-5 h-5 flex items-center justify-center absolute right-2 text-xs bottom-0 bg-common-700 text-white rounded-full p-0.5 bg-opacity-90">
+              <span
+                className={`w-5 h-5 flex items-center justify-center absolute right-2 text-xs bottom-0 bg-common-700 text-white rounded-full p-0.5 bg-opacity-90 ${
+                  totalCartItems > 99 && "text-[10px] "
+                } `}
+              >
                 {totalCartItems}
               </span>
             </Button>

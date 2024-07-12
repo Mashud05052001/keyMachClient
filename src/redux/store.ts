@@ -5,8 +5,8 @@ import cartReducer from "./features/cart/cartSlice";
 export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
-    // reducerName: createdReducer, //For the reducer
     carts: cartReducer,
+    // reducerName: createdReducer, //For the reducer
   },
   devTools: import.meta.env.VITE_NODE_DEV !== "production",
   middleware: (getDefaultMiddleware) =>
