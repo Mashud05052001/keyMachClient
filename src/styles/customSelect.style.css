@@ -1,0 +1,9 @@
+.custom-dropdown select {
+  /* appearance: none; */
+  background-color: #fff; /* Background color */
+  color: #333; /* Text color */
+}
+/* TODO : Select color change work remain */
+.custom-dropdown select option {
+  background-color: #f3f3f3;
+}

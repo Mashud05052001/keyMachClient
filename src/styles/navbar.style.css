@@ -1,0 +1,21 @@
+.navbar-items .active {
+  position: relative;
+  content: "";
+}
+
+.navbar-items .active::after {
+  position: absolute;
+  content: "";
+  height: 3px;
+  width: 90%;
+  background: #ff1a1a; /* common-500 */
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 9999px;
+}
+
+.navbar-items1 .active {
+  color: white;
+  background: #b30000; /* common-700 */
+}
