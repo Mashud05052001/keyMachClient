@@ -41,7 +41,7 @@ const productApi = baseApi.injectEndpoints({
     createNewProduct: builder.mutation({
       query: (payload: TProduct) => {
         return {
-          url: "/create-product",
+          url: "/products/create-product",
           method: "POST",
           body: payload,
         };
@@ -51,7 +51,7 @@ const productApi = baseApi.injectEndpoints({
     updateAProduct: builder.mutation({
       query: ({ id, payload }: { id: string; payload: Partial<TProduct> }) => {
         return {
-          url: `/${id}`,
+          url: `/products/${id}`,
           method: "PATCH",
           body: payload,
         };
@@ -61,11 +61,21 @@ const productApi = baseApi.injectEndpoints({
     deleteAProduct: builder.mutation({
       query: (id: string) => {
         return {
-          url: `/${id}`,
+          url: `/products/${id}`,
           method: "DELETE",
         };
       },
       invalidatesTags: ["products"],
+    }),
+    updateProductQuantityWhileOrdering: builder.mutation({
+      query: (payload: { _id: string; quantity: number }[]) => {
+        return {
+          url: "/products",
+          method: "PUT",
+          body: payload,
+        };
+      },
+      invalidatesTags: [{ type: "products" }],
     }),
   }),
 });
@@ -77,6 +87,7 @@ export const {
   useCreateNewProductMutation,
   useUpdateAProductMutation,
   useDeleteAProductMutation,
+  useUpdateProductQuantityWhileOrderingMutation,
 } = productApi;
 
 export default productApi;

@@ -15,40 +15,40 @@ type TCartState = {
   totalPrice: number;
 };
 
-// const initialState: TCartState = {
-//   cart: [
-//     {
-//       _id: "668d6092b419e6e2621be6e7",
-//       image:
-//         "https://htmlcolorcodes.com/assets/images/colors/steel-gray-color-solid-background-1920x1080.png",
-//       name: "Razer BlackWidow Elite",
-//       price: 169.99,
-//       count: 3,
-//       availableQuantity: 3,
-//     },
-//     {
-//       _id: "668d609bb419e6e2621be6e9",
-//       image:
-//         "https://htmlcolorcodes.com/assets/images/colors/steel-gray-color-solid-background-1920x1080.png",
-//       name: "Corsair K95 RGB Platinum",
-//       price: 199.99,
-//       count: 3,
-//       availableQuantity: 20,
-//     },
-//     {
-//       _id: "6690c7390252c119c53c05cb",
-//       image:
-//         "https://htmlcolorcodes.com/assets/images/colors/steel-gray-color-solid-background-1920x1080.png",
-//       name: "HyperX Alloy FPS Pro",
-//       price: 79.99,
-//       count: 2,
-//       availableQuantity: 35,
-//     },
-//   ],
-//   totalCartItems: 8,
-//   totalPrice: 1269.92,
-// };
 const initialState: TCartState = {
+  cart: [
+    {
+      _id: "668d6092b419e6e2621be6e7",
+      image:
+        "https://htmlcolorcodes.com/assets/images/colors/steel-gray-color-solid-background-1920x1080.png",
+      name: "Razer BlackWidow Elite",
+      price: 169.99,
+      count: 3,
+      availableQuantity: 3,
+    },
+    {
+      _id: "668d609bb419e6e2621be6e9",
+      image:
+        "https://htmlcolorcodes.com/assets/images/colors/steel-gray-color-solid-background-1920x1080.png",
+      name: "Corsair K95 RGB Platinum",
+      price: 199.99,
+      count: 3,
+      availableQuantity: 20,
+    },
+    {
+      _id: "6690c7390252c119c53c05cb",
+      image:
+        "https://htmlcolorcodes.com/assets/images/colors/steel-gray-color-solid-background-1920x1080.png",
+      name: "HyperX Alloy FPS Pro",
+      price: 79.99,
+      count: 2,
+      availableQuantity: 35,
+    },
+  ],
+  totalCartItems: 8,
+  totalPrice: 1269.92,
+};
+const initialState1: TCartState = {
   cart: [],
   totalCartItems: 0,
   totalPrice: 0,
@@ -113,10 +113,15 @@ const cartSlice = createSlice({
         state.totalPrice -= removedCartItem?.count * removedCartItem?.price;
       }
     },
+    clearAllCart(state) {
+      state.cart = [];
+      state.totalCartItems = 0;
+      state.totalPrice = 0;
+    },
   },
 });
 
-export const { addCartItem, updateCartCount, removeACartItem } =
+export const { addCartItem, updateCartCount, removeACartItem, clearAllCart } =
   cartSlice.actions;
 
 export const getCartInfos = (state: RootState) => state.carts.cart;

@@ -53,6 +53,7 @@ const Cart = () => {
       dispatch(updateCartCount({ _id: id, type: type }));
     }
   };
+
   const vatAmount = Number(((cart?.totalPrice * 5) / 100).toFixed(2)),
     totalPayableAmount = Math.floor(vatAmount + cart?.totalPrice);
   return (
@@ -87,7 +88,6 @@ const Cart = () => {
                     </Button>
                   </Modal>
                 </div>
-
                 {/* Cart Image */}
                 <div className="group relative p-1 mr-2">
                   <img
