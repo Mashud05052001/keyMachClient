@@ -3,22 +3,19 @@ import { useUpdateProductQuantityWhileOrderingMutation } from "@/redux/features/
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TOrder } from "@/types/order.types";
 import { TChildren } from "@/types/someShortTypes";
-import { useState } from "react";
-import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const CheckOutFormProvider = ({ children }: TChildren) => {
   const methods = useForm();
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector(getCartInfos);
-  const [updateData, setUpdateData] = useState<
-    { _id: string; quantity: number }[]
-  >([]);
-  // const [addTodo, { isLoading, isSuccess, isError, data, ... }] = useAddTodoMutation();
-  const [updateQuantityWhileOrdering, { data }] =
+  const navigate = useNavigate();
+  const [updateQuantityWhileOrdering] =
     useUpdateProductQuantityWhileOrderingMutation();
 
-  const onSubmit: SubmitHandler<TOrder> = async (data) => {
+  const onSubmit = async (data: TOrder) => {
     if (data.paymentMethod === "stripe") {
       toast.error(
         `The stripe payment methos hasn't implement. Soon it will be added.`
@@ -30,12 +27,13 @@ const CheckOutFormProvider = ({ children }: TChildren) => {
           _id: item._id,
           quantity: item.count,
         }));
-        console.log(updateData);
+
         try {
           const result = await updateQuantityWhileOrdering(updateData).unwrap();
           if (result?.success) {
             dispatch(clearAllCart());
             toast.success("Product quantities updated successfully");
+            navigate("/orderComplete");
           }
         } catch (error) {
           console.log(error);

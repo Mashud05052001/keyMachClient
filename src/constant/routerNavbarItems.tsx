@@ -6,6 +6,7 @@ import Dashboard from "@/pages/dashboard/Dashboard";
 import SingleProduct from "@/pages/products/SingleProduct";
 import Cart from "@/pages/cart/Cart";
 import CheckOut from "@/pages/checkout/CheckOut";
+import SuccessfullOrder from "@/pages/successfullOrder/SuccessfullOrder";
 
 export const routerNavbarItems = [
   { name: "Home", path: "", element: <Home /> },
@@ -16,4 +17,5 @@ export const routerNavbarItems = [
   { path: "products/:id", element: <SingleProduct /> },
   { path: "cart", element: <Cart /> },
   { path: "checkout", element: <CheckOut /> },
+  { path: "orderComplete", element: <SuccessfullOrder /> },
 ];

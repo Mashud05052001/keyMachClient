@@ -1,6 +1,6 @@
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import CommonMarginTopContainer from "@/components/container/CommonMarginTopContainer";
-import Modal from "@/components/modal/Modal";
+import PermitModal from "@/components/modal/PermitModal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -19,16 +19,6 @@ const Cart = () => {
   const cart = useAppSelector((state: RootState) => state.carts);
   const [disableButton, setDisableButton] = useState(false);
   const dispatch = useAppDispatch();
-
-  if (cart.totalCartItems === 0) {
-    return (
-      <div className="mt-20">
-        <h2 className="text-common-500 font-semibold text-center text-2xl">
-          There is no item available in carts
-        </h2>
-      </div>
-    );
-  }
 
   const handleDelete = (id: string) => {
     dispatch(removeACartItem({ _id: id }));
@@ -54,6 +44,15 @@ const Cart = () => {
     }
   };
 
+  if (cart.totalCartItems === 0) {
+    return (
+      <div className="mt-20">
+        <h2 className="text-common-500 font-semibold text-center text-2xl">
+          There is no item available in carts
+        </h2>
+      </div>
+    );
+  }
   const vatAmount = Number(((cart?.totalPrice * 5) / 100).toFixed(2)),
     totalPayableAmount = Math.floor(vatAmount + cart?.totalPrice);
   return (
@@ -78,7 +77,7 @@ const Cart = () => {
               <div className="flex ">
                 {/* Delete Button */}
                 <div className="flex items-center">
-                  <Modal
+                  <PermitModal
                     mainQuestionText="Delete this item from cart?"
                     permitButtonText="Yes, Delete It"
                     permitButtonHandler={() => handleDelete(cartItem?._id)}
@@ -86,7 +85,7 @@ const Cart = () => {
                     <Button variant={"ghost"}>
                       <TrashIcon className="h-6 w-6 text-common-600 " />
                     </Button>
-                  </Modal>
+                  </PermitModal>
                 </div>
                 {/* Cart Image */}
                 <div className="group relative p-1 mr-2">

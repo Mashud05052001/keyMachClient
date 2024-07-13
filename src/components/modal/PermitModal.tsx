@@ -13,11 +13,11 @@ import { ReactNode } from "react";
 type TModalProps = {
   mainQuestionText: string;
   permitButtonText: string;
-  permitButtonHandler: () => Promise<void> | void;
+  permitButtonHandler?: () => Promise<void> | void;
   children: ReactNode;
 };
 
-const Modal = ({
+const PermitModal = ({
   mainQuestionText,
   permitButtonText,
   permitButtonHandler,
@@ -44,4 +44,4 @@ const Modal = ({
   );
 };
 
-export default Modal;
+export default PermitModal;

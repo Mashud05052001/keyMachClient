@@ -33,3 +33,13 @@ export type TFetchAllProductsProps = {
   data: { success: boolean; message: string; data: TProduct[] };
   isLoading?: boolean;
 };
+
+export type TProductSearchQuery = {
+  searchTerm?: string;
+  filter?: string;
+  sort?: string;
+  limit?: 5 | 10 | 15 | 20 | 30 | 40 | 50;
+  page?: number;
+};
+
+export type TProductSearchQueryLimit = 5 | 10 | 15 | 20 | 30 | 40 | 50;

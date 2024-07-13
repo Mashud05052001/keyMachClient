@@ -1,7 +1,7 @@
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import CommonMarginTopContainer from "@/components/container/CommonMarginTopContainer";
-import FormInput from "@/components/Form/FormInput";
-import FormTextArea from "@/components/Form/FormTextArea";
+import FormInput from "@/components/Form/formItems/FormInput";
+import FormTextArea from "@/components/Form/formItems/FormTextArea";
 import { useAppSelector } from "@/redux/hooks";
 import { RootState } from "@/redux/store";
 import { useState } from "react";

@@ -1,6 +1,7 @@
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import CommonMarginTopContainer from "@/components/container/CommonMarginTopContainer";
-import Modal from "@/components/modal/Modal";
+import PermitModal from "@/components/modal/PermitModal";
+
 import SingleProductSkeleton from "@/components/skeleton/SingleProductSkeleton";
 import { addCartItem } from "@/redux/features/cart/cartSlice";
 import { useGetSingleProductQuery } from "@/redux/features/product/productApi";
@@ -11,6 +12,7 @@ import ReactStarsRating from "react-awesome-stars-rating";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 
+// TODO : If already previous available & now item is more than the quantity then gives an error
 const SingleProduct = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -93,7 +95,7 @@ const SingleProduct = () => {
           </div>
           {/* Add To Cart */}
           <div className="pt-5">
-            <Modal
+            <PermitModal
               mainQuestionText="Confirm adding product to cart?"
               permitButtonText="ADD"
               permitButtonHandler={handleAddTOCart}
@@ -102,7 +104,7 @@ const SingleProduct = () => {
                 buttonText="Add To Cart"
                 disabled={productData?.quantity === 0}
               ></PrimaryButton>
-            </Modal>
+            </PermitModal>
           </div>
         </div>
       </div>

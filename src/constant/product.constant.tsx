@@ -1,0 +1,17 @@
+export const productBrandList = [
+  "Logitech",
+  "Razer",
+  "Corsair",
+  "SteelSeries",
+  "Microsoft",
+  "Apple",
+  "HyperX",
+  "Ducky",
+  "Cooler Master",
+  "Das Keyboard",
+  "Filco",
+  "Varmilo",
+  "Keychron",
+  "Anne Pro",
+  "Redragon",
+];

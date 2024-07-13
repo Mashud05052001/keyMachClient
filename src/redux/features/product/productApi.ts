@@ -5,7 +5,6 @@ const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllProducts: builder.query({
       query: (query) => {
-        console.log(query);
         const params = new URLSearchParams();
         if (query) {
           for (let item in query) {
@@ -19,6 +18,32 @@ const productApi = baseApi.injectEndpoints({
         };
       },
       providesTags: [{ type: "products" }],
+    }),
+    getAllProductsForDashboard: builder.query({
+      query: (query) => {
+        const params = new URLSearchParams();
+        if (query) {
+          for (let item in query) {
+            params.append(item, query[item]);
+          }
+        }
+        return {
+          url: "/products",
+          method: "GET",
+          params,
+        };
+      },
+      providesTags: [{ type: "allDashboardProducts" }],
+    }),
+    getProductCount: builder.query({
+      query: () => {
+        console.log("object");
+        return {
+          url: "/products/productsCount/count",
+          method: "GET",
+        };
+      },
+      providesTags: [{ type: "productCount" }],
     }),
     getSingleProduct: builder.query({
       query: (id: string) => {
@@ -39,7 +64,8 @@ const productApi = baseApi.injectEndpoints({
       },
     }),
     createNewProduct: builder.mutation({
-      query: (payload: TProduct) => {
+      query: (payload: Partial<TProduct>) => {
+        console.log(payload);
         return {
           url: "/products/create-product",
           method: "POST",
@@ -56,7 +82,10 @@ const productApi = baseApi.injectEndpoints({
           body: payload,
         };
       },
-      invalidatesTags: (_result, _error, { id }) => [{ type: "products", id }],
+      invalidatesTags: (_result, _error, { id }) => [
+        { type: "products" },
+        { type: "allDashboardProducts" },
+      ],
     }),
     deleteAProduct: builder.mutation({
       query: (id: string) => {
@@ -65,7 +94,7 @@ const productApi = baseApi.injectEndpoints({
           method: "DELETE",
         };
       },
-      invalidatesTags: ["products"],
+      invalidatesTags: ["products", "allDashboardProducts"],
     }),
     updateProductQuantityWhileOrdering: builder.mutation({
       query: (payload: { _id: string; quantity: number }[]) => {
@@ -82,6 +111,8 @@ const productApi = baseApi.injectEndpoints({
 
 export const {
   useGetAllProductsQuery,
+  useGetProductCountQuery,
+  useGetAllProductsForDashboardQuery,
   useGetSingleProductQuery,
   useGetSearchingSuggestionQuery,
   useCreateNewProductMutation,
