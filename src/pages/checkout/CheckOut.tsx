@@ -25,11 +25,27 @@ const CheckOut = () => {
         <CheckOutFormProvider>
           <h1 className="font-medium">Customer Information</h1>
           <div className="grid grid-cols-2 pr-3 gap-3">
-            <FormInput name="Name" type="text" rules={{ required: true }} />
-            <FormInput name="Email" type="email" rules={{ required: true }} />
-            <FormInput name="Phone" type="text" rules={{ required: true }} />
+            <FormInput
+              name="name"
+              label="Name"
+              type="text"
+              rules={{ required: true }}
+            />
+            <FormInput
+              name="email"
+              label="Email"
+              type="email"
+              rules={{ required: true }}
+            />
+            <FormInput
+              name="phone"
+              label="Phone"
+              type="text"
+              rules={{ required: true }}
+            />
             <FormTextArea
-              name="Address"
+              label="Address"
+              name="address"
               className="col-span-2"
               rules={{ required: true }}
             />

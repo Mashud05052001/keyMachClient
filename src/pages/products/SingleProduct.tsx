@@ -109,9 +109,13 @@ const SingleProduct = () => {
         </div>
       </div>
       {/* Product Details section */}
-      <div className="mt-8">
+      <div className="mt-8 w-full md:w-10/12">
         <p className="font-semibold text-2xl mb-3">Details:</p>
-        <p>{productData?.description}</p>
+        {productData?.description
+          .split("\n")
+          .map((line, index) =>
+            line.trim() ? <p key={index}>{line}</p> : <br key={index} />
+          )}
       </div>
     </CommonMarginTopContainer>
   );

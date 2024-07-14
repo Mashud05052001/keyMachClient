@@ -1,7 +1,7 @@
 export type TOrder = {
-  Name: string;
-  Email: string;
-  Phone: string;
-  Address: string;
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
   paymentMethod: "stripe" | "cashOnDelivery";
 };

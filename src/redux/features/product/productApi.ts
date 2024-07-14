@@ -37,7 +37,6 @@ const productApi = baseApi.injectEndpoints({
     }),
     getProductCount: builder.query({
       query: () => {
-        console.log("object");
         return {
           url: "/products/productsCount/count",
           method: "GET",
@@ -82,7 +81,7 @@ const productApi = baseApi.injectEndpoints({
           body: payload,
         };
       },
-      invalidatesTags: (_result, _error, { id }) => [
+      invalidatesTags: (_result, _error, {}) => [
         { type: "products" },
         { type: "allDashboardProducts" },
       ],

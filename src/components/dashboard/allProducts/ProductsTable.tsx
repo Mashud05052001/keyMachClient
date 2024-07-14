@@ -2,17 +2,18 @@
 import {
   ColumnDef,
   ColumnFiltersState,
-  SortingState,
-  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getSortedRowModel,
+  SortingState,
   useReactTable,
+  VisibilityState,
 } from "@tanstack/react-table";
 import { ChevronDown } from "lucide-react";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
+import GeneratePaginate from "@/components/pagination/GeneratePaginate";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -21,6 +22,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -34,18 +43,7 @@ import {
   TProductSearchQuery,
   TProductSearchQueryLimit,
 } from "@/types/product.types";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import GeneratePaginate from "@/components/pagination/GeneratePaginate";
-
-// TODO : Filter Imeplementing remaining
+import { generateSelectGroup } from "@/utils/generateSelectedGroups";
 
 type TTable = {
   data: TProduct[];
@@ -53,6 +51,10 @@ type TTable = {
   isLoading: boolean;
   columns: ColumnDef<TProduct>[];
   productSearchQuery: TProductSearchQuery;
+  currentPage: number;
+  productsPerPage: number;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+  setProductsPerPage: Dispatch<SetStateAction<number>>;
   setProductSearchQuery: Dispatch<SetStateAction<TProductSearchQuery>>;
 };
 
@@ -61,13 +63,17 @@ const ProductsTable = ({
   totalData,
   isLoading,
   columns,
+  currentPage = 1,
+  setCurrentPage,
+  productsPerPage,
+  setProductsPerPage,
   productSearchQuery,
   setProductSearchQuery,
 }: TTable) => {
-  const [productsPerPage, setProductsPerPage] = useState<number>(
-    productSearchQuery?.limit ? productSearchQuery?.limit : 10
-  );
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [productsPerPage, setProductsPerPage] = useState<number>(
+  //   productSearchQuery?.limit ? productSearchQuery?.limit : 10
+  // );
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -105,7 +111,7 @@ const ProductsTable = ({
   }
 
   return (
-    <div className="w-full mb-80">
+    <div className="w-full mb-4">
       {/* Top Filter */}
       <div className="flex items-center py-4">
         {/* Search Field */}
@@ -221,19 +227,13 @@ const ProductsTable = ({
               });
             }}
           >
-            <SelectTrigger className="w-[70px]">
-              <SelectValue placeholder={10} />
+            <SelectTrigger className="w-[70px] focus-visible:border-transparent">
+              <SelectValue />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
                 <SelectLabel>Item per table</SelectLabel>
-                <SelectItem value="5">5</SelectItem>
-                <SelectItem value="10">10</SelectItem>
-                <SelectItem value="15">15</SelectItem>
-                <SelectItem value="20">20</SelectItem>
-                <SelectItem value="30">30</SelectItem>
-                <SelectItem value="40">40</SelectItem>
-                <SelectItem value="50">50</SelectItem>
+                {generateSelectGroup(totalData)}
               </SelectGroup>
             </SelectContent>
           </Select>

@@ -1,14 +1,11 @@
 import MainContainer from "@/components/container/MainContainer";
 import Navbar from "@/components/share/Navbar";
-import { useAppSelector } from "@/redux/hooks";
-import { RootState } from "@/redux/store";
-import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
-  const noOfCartItems = useAppSelector(
-    (state: RootState) => state.carts.totalCartItems
-  );
+  // const noOfCartItems = useAppSelector(
+  //   (state: RootState) => state.carts.totalCartItems
+  // );
   // TODO : Implemented it before submission
   // useEffect(() => {
   //   const handleBeforeUnload = (e: BeforeUnloadEvent) => {

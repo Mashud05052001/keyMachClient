@@ -43,3 +43,6 @@ export type TProductSearchQuery = {
 };
 
 export type TProductSearchQueryLimit = 5 | 10 | 15 | 20 | 30 | 40 | 50;
+export const productSelectList: TProductSearchQueryLimit[] = [
+  5, 10, 15, 20, 30, 40, 50,
+];

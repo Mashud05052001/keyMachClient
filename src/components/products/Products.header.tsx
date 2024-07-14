@@ -7,12 +7,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useGetAllProductsQuery } from "@/redux/features/product/productApi";
+import "@/styles/customSelect.style.css";
 import { AdjustmentsVerticalIcon } from "@heroicons/react/24/outline";
 import React, { useState } from "react";
-import PrimaryButton from "../buttons/PrimaryButton";
-import "@/styles/customSelect.style.css";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { TProduct } from "@/types/product.types";
+import PrimaryButton from "../buttons/PrimaryButton";
 
 type TFilter = {
   min?: number;

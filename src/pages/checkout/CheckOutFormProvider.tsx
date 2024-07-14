@@ -1,21 +1,24 @@
+import LoadingSpinner from "@/components/loading/LoadingSpinner";
 import { clearAllCart, getCartInfos } from "@/redux/features/cart/cartSlice";
 import { useUpdateProductQuantityWhileOrderingMutation } from "@/redux/features/product/productApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TOrder } from "@/types/order.types";
 import { TChildren } from "@/types/someShortTypes";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const CheckOutFormProvider = ({ children }: TChildren) => {
   const methods = useForm();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector(getCartInfos);
   const navigate = useNavigate();
   const [updateQuantityWhileOrdering] =
     useUpdateProductQuantityWhileOrderingMutation();
 
-  const onSubmit = async (data: TOrder) => {
+  const onSubmit = async (data: Partial<TOrder>) => {
     if (data.paymentMethod === "stripe") {
       toast.error(
         `The stripe payment methos hasn't implement. Soon it will be added.`
@@ -23,6 +26,7 @@ const CheckOutFormProvider = ({ children }: TChildren) => {
     } else {
       if (!cartItems) toast.error(`No cart items available for place order`);
       else {
+        setIsLoading(true);
         const updateData = cartItems.map((item) => ({
           _id: item._id,
           quantity: item.count,
@@ -31,12 +35,14 @@ const CheckOutFormProvider = ({ children }: TChildren) => {
         try {
           const result = await updateQuantityWhileOrdering(updateData).unwrap();
           if (result?.success) {
+            setIsLoading(false);
             dispatch(clearAllCart());
             toast.success("Product quantities updated successfully");
             navigate("/orderComplete");
           }
         } catch (error) {
           console.log(error);
+          setIsLoading(false);
           toast.error(`Failed to order`);
         }
       }
@@ -45,8 +51,11 @@ const CheckOutFormProvider = ({ children }: TChildren) => {
 
   return (
     <FormProvider {...methods}>
+      {isLoading && <LoadingSpinner />}
       <form
-        className="space-y-4 px-4 sm:pl-3 sm:pr-0  border-2 py-4 rounded-md"
+        className={`space-y-4 px-4 sm:pl-3 sm:pr-0  border-2 py-4 rounded-md  ${
+          isLoading && "opacity-50 -z-10"
+        }`}
         onSubmit={methods.handleSubmit(onSubmit)}
       >
         {children}

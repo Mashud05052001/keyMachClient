@@ -29,6 +29,7 @@ const GeneratePaginate = ({
     if (type === "prev") {
       return (
         <PaginationItem
+          key={value}
           className={`cursor-pointer ${
             currentPage === 1 && "opacity-50 cursor-auto"
           }`}
@@ -44,6 +45,7 @@ const GeneratePaginate = ({
     } else if (type === "next") {
       return (
         <PaginationItem
+          key={value}
           className={`cursor-pointer ${
             currentPage === totalPage && "opacity-50 cursor-auto"
           }`}
@@ -58,13 +60,14 @@ const GeneratePaginate = ({
       );
     } else if (type === "ellipse") {
       return (
-        <PaginationItem className="cursor-pointer">
+        <PaginationItem className="cursor-pointer" key={value}>
           <PaginationEllipsis />
         </PaginationItem>
       );
     } else if (type === "number") {
       return (
         <PaginationItem
+          key={value}
           onClick={() => setCurrentPage(value!)}
           className={`cursor-pointer`}
         >
@@ -85,7 +88,7 @@ const GeneratePaginate = ({
     bothSideRange: number = 1
   ) => {
     const paginationItems = [];
-    paginationItems.push(generatePaginationItem("prev"));
+    paginationItems.push(generatePaginationItem("prev", 0));
     for (let i = 1; i <= totalPage; i++) {
       if (
         i === 1 ||
@@ -99,10 +102,10 @@ const GeneratePaginate = ({
         i === currentPage - centerRange - 1 ||
         i === currentPage + centerRange + 1
       ) {
-        paginationItems.push(generatePaginationItem("ellipse"));
+        paginationItems.push(generatePaginationItem("ellipse", i));
       }
     }
-    paginationItems.push(generatePaginationItem("next"));
+    paginationItems.push(generatePaginationItem("next", totalPage + 1));
     return paginationItems;
   };
 
