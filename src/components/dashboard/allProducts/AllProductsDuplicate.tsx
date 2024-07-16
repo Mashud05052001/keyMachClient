@@ -10,7 +10,11 @@ import {
   useGetAllProductsForDashboardQuery,
   useGetProductCountQuery,
 } from "@/redux/features/product/productApi";
-import { TProduct, TProductSearchQuery } from "@/types/product.types";
+import {
+  TProduct,
+  TProductSearchQuery,
+  TProductSearchQueryLimit,
+} from "@/types/product.types";
 import {
   ArrowsUpDownIcon,
   PencilSquareIcon,
@@ -143,15 +147,17 @@ const AllProductsDuplicate = () => {
     limit: 5,
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState<number>(
-    productQuery?.limit ? productQuery?.limit : 10
-  );
+  const [productsPerPage, setProductsPerPage] =
+    useState<TProductSearchQueryLimit>(
+      productQuery?.limit ? productQuery?.limit : 10
+    );
   const { data: totalProductsResponse, isLoading: countLoading } =
     useGetProductCountQuery(undefined);
   const totalProduct = totalProductsResponse?.data;
 
   const { data, isLoading } = useGetAllProductsForDashboardQuery(productQuery);
   const productsData = data?.data;
+
   if (isLoading || countLoading) {
     return <LoadingSpinner />;
   }

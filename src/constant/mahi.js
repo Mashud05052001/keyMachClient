@@ -1,35 +1,17 @@
-const routerNavbarItems = [
-  { name: "Home", path: "", element: "<Home />" },
-  { name: "Products", path: "products", element: "<Products />" },
-  { path: "products/:id", element: "<SingleProduct />" },
-  { name: "About Us", path: "aboutUs", element: "<About />" },
-  { name: "Contact Us", path: "contactUs", element: "<ContactUs />" },
-  { name: "Dashboard", path: "dashboard", element: "<Dashboard />" },
-];
-
-// type TRoutes = {
-//   path: string;
-//   element: string;
-// };
-// type TNavbar = {
-//   to: string;
-//   name: string;
-// };
-const routes = routerNavbarItems.reduce((acc, item) => {
-  if (item.element && (item.path || item.path === "")) {
-    acc.push({ path: item.path, element: item.element });
+function convert(number, from, to) {
+  if (from < 2 || from > 16 || to < 2 || to > 16) {
+    return "Invalid Input";
   }
-  return acc;
-}, []);
-
-const navbar = routerNavbarItems.reduce((acc, item) => {
-  if (item.name && (item.path || item.path === "")) {
-    acc.push({
-      name: item.name,
-      to: `/${item.path}`,
-    });
+  if (from != 10) {
+    number = parseInt(number, from);
+    if (isNaN(number)) {
+      return "invalid input";
+    }
   }
-  return acc;
-}, []);
+  return number.toString(to).toUpperCase();
+}
 
-console.log(routes, navbar);
+console.log(convert(25, 10, 2)); // Output: 11001
+console.log(convert("11001", 2, 8)); // Output: 31
+console.log(convert(31, 8, 16)); // Output: 1F
+console.log(convert("1F", 16, 10)); // Output: 31

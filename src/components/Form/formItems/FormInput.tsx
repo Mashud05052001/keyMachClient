@@ -1,5 +1,6 @@
-import { Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { Input } from "../../ui/input";
+import { useState } from "react";
 
 type TFormInput = {
   name: string;
@@ -9,6 +10,7 @@ type TFormInput = {
   rules?: any;
 };
 const FormInput = ({ name, type, className, label }: TFormInput) => {
+  const [isFieldError, setIsFieldError] = useState(false);
   const generateMax = () => {
     if (name === "rating") return 5;
     return 9999999;
@@ -19,6 +21,9 @@ const FormInput = ({ name, type, className, label }: TFormInput) => {
     }
     return parseFloat(value);
   };
+  const {
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <div className={`relative  rounded-lg ${className}`}>
@@ -26,25 +31,11 @@ const FormInput = ({ name, type, className, label }: TFormInput) => {
         name={name}
         rules={{ required: `${label ? label : name} is required` }}
         render={({ field }) => (
-          // <div className="relative w-max rounded-lg">
-          //   <input
-          //     className="peer rounded-lg border border-sky-600 bg-transparent px-4 py-2 text-sky-600 focus:outline-none"
-          //     type="text"
-          //     placeholder=""
-          //     id="navigate_ui_input_33"
-          //   />
-          //   <label
-          //     className="absolute -top-2 left-2 rounded-md bg-sky-600 px-2 text-xs text-sky-100 duration-300 peer-placeholder-shown:top-3 peer-placeholder-shown:bg-transparent peer-placeholder-shown:text-sm peer-placeholder-shown:text-zinc-400 peer-focus:-top-2 peer-focus:bg-sky-600 peer-focus:text-xs peer-focus:text-sky-100"
-          //     htmlFor="navigate_ui_input_33"
-          //   >
-          //     Email
-          //   </label>
-          // </div>
           <div className="relative">
             <Input
               {...field}
               className={`peer w-full rounded-lg border border-gray-500 bg-transparent px-4 py-2 text-gray-800 focus:outline-none focus-visible:ring-0 focus-visible:ring-transparent ${
-                field.value === "" && "border-red-600"
+                errors[name] && "border-red-600"
               }`}
               type={type}
               min={0}

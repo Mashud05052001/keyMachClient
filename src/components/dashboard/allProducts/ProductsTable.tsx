@@ -14,6 +14,7 @@ import { ChevronDown } from "lucide-react";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 import GeneratePaginate from "@/components/pagination/GeneratePaginate";
+import GenerateProductsPerPage from "@/components/pagination/GenerateProductsPerPage";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -22,14 +23,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -43,7 +36,6 @@ import {
   TProductSearchQuery,
   TProductSearchQueryLimit,
 } from "@/types/product.types";
-import { generateSelectGroup } from "@/utils/generateSelectedGroups";
 
 type TTable = {
   data: TProduct[];
@@ -52,9 +44,9 @@ type TTable = {
   columns: ColumnDef<TProduct>[];
   productSearchQuery: TProductSearchQuery;
   currentPage: number;
-  productsPerPage: number;
+  productsPerPage: TProductSearchQueryLimit;
   setCurrentPage: Dispatch<SetStateAction<number>>;
-  setProductsPerPage: Dispatch<SetStateAction<number>>;
+  setProductsPerPage: Dispatch<SetStateAction<TProductSearchQueryLimit>>;
   setProductSearchQuery: Dispatch<SetStateAction<TProductSearchQuery>>;
 };
 
@@ -70,10 +62,6 @@ const ProductsTable = ({
   productSearchQuery,
   setProductSearchQuery,
 }: TTable) => {
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [productsPerPage, setProductsPerPage] = useState<number>(
-  //   productSearchQuery?.limit ? productSearchQuery?.limit : 10
-  // );
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -216,27 +204,13 @@ const ProductsTable = ({
         </div>
         {/* Product Per Page */}
         <div>
-          <Select
-            defaultValue={productsPerPage.toString()}
-            onValueChange={(value) => {
-              const productPerPage = Number(value);
-              setProductsPerPage(productPerPage);
-              setProductSearchQuery({
-                ...productSearchQuery,
-                limit: productPerPage as TProductSearchQueryLimit,
-              });
-            }}
-          >
-            <SelectTrigger className="w-[70px] focus-visible:border-transparent">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Item per table</SelectLabel>
-                {generateSelectGroup(totalData)}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <GenerateProductsPerPage
+            query={productSearchQuery}
+            setQuery={setProductSearchQuery}
+            productsPerPage={productsPerPage}
+            setProductsPerPage={setProductsPerPage}
+            totalProductsCount={totalData}
+          />
         </div>
       </div>
     </div>

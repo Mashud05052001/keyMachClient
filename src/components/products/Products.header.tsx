@@ -6,12 +6,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useGetAllProductsQuery } from "@/redux/features/product/productApi";
 import "@/styles/customSelect.style.css";
 import { AdjustmentsVerticalIcon } from "@heroicons/react/24/outline";
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import PrimaryButton from "../buttons/PrimaryButton";
+import { TProductSearchQuery } from "@/types/product.types";
 
 type TFilter = {
   min?: number;
@@ -19,15 +19,19 @@ type TFilter = {
   sort?: string;
 };
 
-const ProductsHeaderSection = () => {
-  const [query, setQuery] = useState<Record<string, unknown>>({});
-  const { register, handleSubmit, reset: filterReset } = useForm<TFilter>();
-  const { data } = useGetAllProductsQuery(query);
+type TProductsHeaderProps = {
+  query: TProductSearchQuery;
+  setQuery: Dispatch<SetStateAction<TProductSearchQuery>>;
+  totalProducts: number;
+};
 
-  let productsCount = 0;
-  if (data?.success) {
-    productsCount = data.data.length;
-  }
+const ProductsHeaderSection = ({
+  query,
+  setQuery,
+  totalProducts,
+}: TProductsHeaderProps) => {
+  const { register, handleSubmit, reset: filterReset } = useForm<TFilter>();
+
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -40,7 +44,7 @@ const ProductsHeaderSection = () => {
         setQuery({ ...otherQueries });
       }
     } else {
-      setQuery({ ...query, searchTerm });
+      setQuery({ ...query, searchTerm: searchTerm as string });
     }
 
     // refetch();
@@ -68,20 +72,14 @@ const ProductsHeaderSection = () => {
     setQuery({ ...othersQuery });
     filterReset();
   };
+
   return (
     <div className="flex justify-between items-center relative">
-      {/* <div className="absolute bg-red-400 w-screen top-40 grid grid-cols-4">
-        {data?.data.map((item: TProduct) => (
-          <div key={item._id}>
-            {item.name} = {item.price}
-          </div>
-        ))}
-      </div> */}
       {/* Count of products */}
       <div>
         <h3 className="text-lg font-semibold pl-3">
           Total Products:{" "}
-          <span className="text-common-600">{productsCount}</span>
+          <span className="text-common-600">{totalProducts}</span>
         </h3>
       </div>
       {/* SearchBox */}

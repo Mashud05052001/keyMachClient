@@ -38,7 +38,7 @@ export type TProductSearchQuery = {
   searchTerm?: string;
   filter?: string;
   sort?: string;
-  limit?: 5 | 10 | 15 | 20 | 30 | 40 | 50;
+  limit?: TProductSearchQueryLimit;
   page?: number;
 };
 

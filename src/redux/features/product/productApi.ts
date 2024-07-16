@@ -71,7 +71,7 @@ const productApi = baseApi.injectEndpoints({
           body: payload,
         };
       },
-      invalidatesTags: ["products"],
+      invalidatesTags: ["products", "allDashboardProducts", "productCount"],
     }),
     updateAProduct: builder.mutation({
       query: ({ id, payload }: { id: string; payload: Partial<TProduct> }) => {
@@ -84,6 +84,7 @@ const productApi = baseApi.injectEndpoints({
       invalidatesTags: (_result, _error, {}) => [
         { type: "products" },
         { type: "allDashboardProducts" },
+        { type: "productCount" },
       ],
     }),
     deleteAProduct: builder.mutation({
@@ -93,7 +94,7 @@ const productApi = baseApi.injectEndpoints({
           method: "DELETE",
         };
       },
-      invalidatesTags: ["products", "allDashboardProducts"],
+      invalidatesTags: ["products", "allDashboardProducts", "productCount"],
     }),
     updateProductQuantityWhileOrdering: builder.mutation({
       query: (payload: { _id: string; quantity: number }[]) => {
@@ -103,7 +104,7 @@ const productApi = baseApi.injectEndpoints({
           body: payload,
         };
       },
-      invalidatesTags: [{ type: "products" }],
+      invalidatesTags: ["products", "allDashboardProducts", "productCount"],
     }),
   }),
 });

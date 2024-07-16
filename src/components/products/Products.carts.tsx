@@ -1,13 +1,19 @@
-import { useGetAllProductsQuery } from "@/redux/features/product/productApi";
 import { TProduct } from "@/types/product.types";
 import ProductCart from "../share/ProductCart";
 import ProductsCartSkeleton from "../skeleton/ProductsCartSkeleton";
 
-const ProductsAllCarts = () => {
-  // const { data: allTodos, isLoading, isError, isSuccess } = useGetTodosQuery(priority, {pollingInterval: 1000, ....});
-  const { data, isLoading } = useGetAllProductsQuery({});
-  console.log(data?.data);
-  if (isLoading) {
+type TAllProductsProps = {
+  allProducts: TProduct[];
+  isLoading: boolean;
+  countLoading: boolean;
+};
+
+const ProductsAllCarts = ({
+  allProducts,
+  isLoading,
+  countLoading,
+}: TAllProductsProps) => {
+  if (isLoading || countLoading) {
     return (
       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5">
         {Array(12)
@@ -18,7 +24,6 @@ const ProductsAllCarts = () => {
       </div>
     );
   }
-  const allProducts: TProduct[] = data?.data;
   return (
     <>
       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5">
