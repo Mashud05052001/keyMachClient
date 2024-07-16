@@ -1,6 +1,5 @@
 import { Controller, useFormContext } from "react-hook-form";
 import { Input } from "../../ui/input";
-import { useState } from "react";
 
 type TFormInput = {
   name: string;
@@ -10,7 +9,6 @@ type TFormInput = {
   rules?: any;
 };
 const FormInput = ({ name, type, className, label }: TFormInput) => {
-  const [isFieldError, setIsFieldError] = useState(false);
   const generateMax = () => {
     if (name === "rating") return 5;
     return 9999999;

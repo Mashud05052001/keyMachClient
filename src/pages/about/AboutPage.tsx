@@ -18,7 +18,12 @@ const AboutPage = () => {
   }, []);
 
   return (
-    <div className="p-4 lg:h-[90vh] md:p-8 flex items-center">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: isVisible ? 1 : 0 }}
+      transition={{ duration: 0.3 }}
+      className="p-4 lg:h-[90vh] md:p-8 flex items-center"
+    >
       {/* <div className="lg:grid grid-cols-2 flex flex-col-reverse"> */}
       <div className=" flex flex-col-reverse lg:grid lg:grid-cols-2">
         <div className="">
@@ -65,20 +70,15 @@ const AboutPage = () => {
             </NavLink>
           </p>
         </div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isVisible ? 1 : 0 }}
-          transition={{ duration: 1 }}
-          className="md:w-8/12 mx-auto lg:w-full relative xl:h-[70vh] 2xl:h-[50vh] mb-3 lg:mb-0 "
-        >
+        <div className="md:w-8/12 mx-auto lg:w-full relative xl:h-[70vh] 2xl:h-[50vh] mb-3 lg:mb-0 ">
           <div className="max-h-full">
             <div className="lg:absolute lg:top-1/2 lg:-translate-y-1/2 ">
               <Lottie animationData={aboutAnimation} className="mx-auto" />
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

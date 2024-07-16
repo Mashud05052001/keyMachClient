@@ -1,1 +1,14 @@
 1. form reset clean form
+
+
+
+   useEffect(() => {
+     const interval = setInterval(() => {
+       if (api?.canScrollNext()) api?.scrollNext();
+       else api?.scrollTo(0);
+     }, 2000);
+     return () => clearInterval(interval);
+   }, [api]);
+
+
+   

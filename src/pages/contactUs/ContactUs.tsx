@@ -1,11 +1,10 @@
-import Lottie from "lottie-react";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
-import aboutAnimation from "../../assets/Animation/about-us.json";
 import FormInput from "@/components/Form/formItems/FormInput";
-import { FormProvider, useForm } from "react-hook-form";
 import FormTextArea from "@/components/Form/formItems/FormTextArea";
+import { contactUsArray } from "@/constant/contactUs.constant";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 const ContactUs = () => {
@@ -22,14 +21,43 @@ const ContactUs = () => {
     }
   };
   return (
-    <div className="p-8  lg:h-[90vh] flex items-center ">
-      {/* <div className="lg:grid grid-cols-2 flex flex-col-reverse"> */}
-      <div className=" flex flex-col-reverse  lg:grid lg:grid-cols-2 items-center mx-auto justify-center ">
-        <div className="flex justify-end w-full">
-          <div className="w-full lg:w-10/12 mt-5 lg:mt-0">
-            <div>
-              <h2 className="text-2xl font-semibold mb-4">Facing any issue?</h2>
-              <p className="mb-6 text-base">Feel free to contact us</p>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: isVisible ? 1 : 0 }}
+      transition={{ duration: 0.3 }}
+      className="py-5 px-4 lg:py-8  flex items-center "
+    >
+      <div className="flex flex-col justify-center w-full ">
+        {/* Contact Us Infos */}
+        <div className="h-full w-full lg:w-7/12 mx-auto mb-10">
+          <div className="mx-auto relative mb-3 lg:mb-0">
+            <div className="mb-6 text-3xl font-semibold">
+              <h1 className="text-center">Contact Us</h1>
+            </div>
+            <div className="lg:space-x-2 grid gap-3 sm:grid-cols-2 md:grid-cols-3  font-semibold">
+              {contactUsArray &&
+                contactUsArray?.map((item) => (
+                  <div
+                    key={item.id}
+                    className="space-y-2 hover:scale-105 duration-150 border-[0.1px] border-b-2 border-r-2  p-5 rounded-lg border-gray-200 shadow "
+                  >
+                    {/* logo */}
+                    <div className="flex items-center space-x-3">
+                      <item.icon />
+                      <h2>{item.title}</h2>
+                    </div>
+                    <p className="text-sm">{item.value}</p>
+                  </div>
+                ))}
+            </div>
+          </div>
+        </div>
+        {/* Contact Us Email */}
+        <div className="flex justify-center w-full lg:w-7/12 mx-auto">
+          <div className="w-full  mt-5 lg:mt-0">
+            <div className="text-center space-y-1 mb-2">
+              <h2 className="text-xl font-semibold">Facing any issue?</h2>
+              <p className="mb-6 text-sm">Feel free to contact us</p>
             </div>
             <div className="select-none border-[0.1px] border-b-2 border-r-2  p-5 rounded-lg border-gray-200 shadow-md ">
               <FormProvider {...methods}>
@@ -53,18 +81,8 @@ const ContactUs = () => {
             </div>
           </div>
         </div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isVisible ? 1 : 0 }}
-          transition={{ duration: 1 }}
-          className="mx-auto relative mb-3 lg:mb-0"
-        >
-          <div className="mx-auto">
-            <Lottie animationData={aboutAnimation} className="mx-auto" />
-          </div>
-        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

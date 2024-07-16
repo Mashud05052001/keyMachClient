@@ -47,7 +47,6 @@ const CheckOut = () => {
               label="Address"
               name="address"
               className="col-span-2"
-              rules={{ required: true }}
             />
           </div>
           {/* Payable Amount Info */}
