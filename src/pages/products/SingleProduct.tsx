@@ -16,7 +16,6 @@ const SingleProduct = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  // const { data: allTodos, isLoading, isError, isSuccess } = useGetTodosQuery(priority, {pollingInterval: 1000, ....});
   const { data, isLoading, isFetching } = useGetSingleProductQuery(
     id as string
   );

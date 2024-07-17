@@ -29,7 +29,6 @@ const UpdateProductFormProvider = ({
   product,
 }: TUpdateProductFormProviderProps) => {
   const methods = useForm({ defaultValues: product });
-  // const [addTodo, { isLoading, isSuccess, isError, data, ... }] = useAddTodoMutation();
   const [updateProductApi] = useUpdateAProductMutation();
   const onSubmit = async (data: TProduct) => {
     const updatedContent: Record<string, unknown> = {};
