@@ -1,4 +1,4 @@
-import PrimaryButton from "@/components/buttons/PrimaryButton";
+import SecondaryFilledButton from "@/components/buttons/SecondaryButton";
 import CommonMarginTopContainer from "@/components/container/CommonMarginTopContainer";
 import FormInput from "@/components/Form/formItems/FormInput";
 import FormTextArea from "@/components/Form/formItems/FormTextArea";
@@ -126,7 +126,7 @@ const CheckOut = () => {
           </div>
           {/* Place Order Button */}
           <div>
-            <PrimaryButton
+            <SecondaryFilledButton
               type="submit"
               buttonText="Place Order"
               className="w-40"

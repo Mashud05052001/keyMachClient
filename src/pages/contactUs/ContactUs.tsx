@@ -1,4 +1,4 @@
-import PrimaryButton from "@/components/buttons/PrimaryButton";
+import SecondaryFilledButton from "@/components/buttons/SecondaryButton";
 import FormInput from "@/components/Form/formItems/FormInput";
 import FormTextArea from "@/components/Form/formItems/FormTextArea";
 import { contactUsArray } from "@/constant/contactUs.constant";
@@ -71,7 +71,7 @@ const ContactUs = () => {
                       rows={6}
                     />
                   </div>
-                  <PrimaryButton
+                  <SecondaryFilledButton
                     buttonText="Complain Here"
                     type="submit"
                     className="mt-6"

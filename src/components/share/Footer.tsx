@@ -80,13 +80,13 @@ const Footer = () => {
           </div>
         </div>
         <div className="text-center mt-6">
-          <p>
+          <div>
             &copy; Copyright 2024 - All right reserved by
             <p className="font-semibold inline-block pl-1">
               Key
               <span className="text-common-600">Mach</span>
             </p>
-          </p>
+          </div>
         </div>
       </div>
     </footer>

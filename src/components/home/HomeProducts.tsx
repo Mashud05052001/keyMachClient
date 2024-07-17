@@ -20,7 +20,7 @@ const HomeProducts = () => {
   if (isLoading) {
     return <LoadingSpinner />;
   }
-  const latestProducts: TProduct[] = latestdata.data;
+  const latestProducts: TProduct[] = latestdata?.data;
 
   return (
     <div className="overflow-hidden">

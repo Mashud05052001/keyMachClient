@@ -1,4 +1,4 @@
-import PrimaryButton from "@/components/buttons/PrimaryButton";
+import SecondaryFilledButton from "@/components/buttons/SecondaryButton";
 import CommonMarginTopContainer from "@/components/container/CommonMarginTopContainer";
 import PermitModal from "@/components/modal/PermitModal";
 import { Button } from "@/components/ui/button";
@@ -177,7 +177,7 @@ const Cart = () => {
               </div>
               <div className="flex justify-end pr-3 pb-4">
                 <NavLink to={"/checkout"}>
-                  <PrimaryButton
+                  <SecondaryFilledButton
                     buttonText="Proceed To Checkout"
                     disabled={disableButton}
                   />

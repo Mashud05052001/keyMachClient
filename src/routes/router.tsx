@@ -1,13 +1,12 @@
-import MainLayout from "../layout/MainLayout";
-import { createBrowserRouter } from "react-router-dom";
-import ErrorElement from "@/components/ErrorElement/ErrorElement";
 import { generateRouterItems } from "@/utils/generateDynamicRoutesNavbar";
+import { createBrowserRouter } from "react-router-dom";
+import MainLayout from "../layout/MainLayout";
 
 const router: ReturnType<typeof createBrowserRouter> = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement: <ErrorElement />,
+    // errorElement: <ErrorElement />,
     children: generateRouterItems(),
   },
 ]);

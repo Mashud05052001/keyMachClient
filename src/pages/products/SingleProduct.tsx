@@ -3,9 +3,9 @@ import CommonMarginTopContainer from "@/components/container/CommonMarginTopCont
 import PermitModal from "@/components/modal/PermitModal";
 
 import SingleProductSkeleton from "@/components/skeleton/SingleProductSkeleton";
-import { addCartItem } from "@/redux/features/cart/cartSlice";
+import { addCartItem, getCartInfos } from "@/redux/features/cart/cartSlice";
 import { useGetSingleProductQuery } from "@/redux/features/product/productApi";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { TProduct } from "@/types/product.types";
 import { ArrowUturnLeftIcon } from "@heroicons/react/24/outline";
 import ReactStarsRating from "react-awesome-stars-rating";
@@ -20,6 +20,8 @@ const SingleProduct = () => {
     id as string
   );
   const productData: TProduct = data?.data;
+  const cartItems = useAppSelector(getCartInfos);
+  console.log(cartItems);
 
   const generateProductRemaining = (
     <>
@@ -40,6 +42,19 @@ const SingleProduct = () => {
   }
 
   const handleAddTOCart = async () => {
+    if (cartItems?.length > 0) {
+      for (const cart of cartItems) {
+        if (cart._id === productData?._id) {
+          if (cart.count >= cart.availableQuantity) {
+            toast.error(
+              "You cannot add to cart more than total available items"
+            );
+            return;
+          }
+        }
+      }
+    }
+
     const cartItem = {
       _id: productData?._id,
       name: productData?.name,
