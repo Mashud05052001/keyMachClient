@@ -7,7 +7,7 @@ import {
   useGetProductCountQuery,
 } from "@/redux/features/product/productApi";
 import { TProduct, TProductSearchQuery } from "@/types/product.types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Products = () => {
   const [query, setQuery] = useState<TProductSearchQuery>({ limit: 5 });
@@ -26,12 +26,21 @@ const Products = () => {
     currentPageProductsCount = data?.data?.length;
   }
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const countOfProducts =
+    query?.searchTerm || query?.filter
+      ? allProducts?.length
+      : totalProductsCount;
+
   return (
     <CommonMarginTopContainer>
       <ProductsHeaderSection
         query={query}
         setQuery={setQuery}
-        totalProducts={currentPageProductsCount}
+        totalProducts={countOfProducts}
       />
       <CommonMarginTopContainer>
         <ProductsAllCarts
@@ -44,7 +53,7 @@ const Products = () => {
         <ProductsPaginate
           query={query}
           setQuery={setQuery}
-          totalProductsCount={totalProductsCount}
+          totalProductsCount={countOfProducts}
         />
       </CommonMarginTopContainer>
     </CommonMarginTopContainer>

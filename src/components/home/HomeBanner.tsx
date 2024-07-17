@@ -7,7 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../ui/carousel";
-import { allHomeBanners } from "@/constant/homeBanner.constant";
+import { allHomeBanners } from "@/constant/homeConstant";
 
 const HomeBanner = () => {
   // 0,1,2,3
@@ -28,7 +28,7 @@ const HomeBanner = () => {
     const interval = setInterval(() => {
       if (activeIndex >= 3) setActiveIndex(0);
       else setActiveIndex(activeIndex + 1);
-    }, 10000000);
+    }, 3000);
     return () => clearInterval(interval);
   }, [activeIndex]);
 

@@ -1,6 +1,4 @@
-import { Button } from "../ui/button";
-
-type TPrimaryButtonProps = {
+export type TButtonProps = {
   buttonText: string;
   className?: string;
   type?: "button" | "submit" | "reset";
@@ -11,15 +9,15 @@ const PrimaryButton = ({
   className,
   type = "button",
   disabled = false,
-}: TPrimaryButtonProps) => {
+}: TButtonProps) => {
   return (
-    <Button
+    <button
       type={type}
-      className={`bg-common-800/80 hover:bg-common-700 ${className}`}
+      className={`bg-transparent text-common-800/80 hover:text-common-700 border-[1.5px] rounded-lg border-common-800/80 font-semibold hover:bg-gray-200/70 ${className} duration-100 overflow-hidden`}
       disabled={disabled}
     >
-      {buttonText}
-    </Button>
+      <p className="w-full h-full py-1 rounded-lg ">{buttonText}</p>
+    </button>
   );
 };
 

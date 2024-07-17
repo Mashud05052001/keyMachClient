@@ -1,10 +1,10 @@
+import SecondaryFilledButton from "@/components/buttons/SecondaryButton";
 import { productBrandList } from "@/constant/product.constant";
+import FormFile from "../formItems/FormFile";
 import FormInput from "../formItems/FormInput";
 import FormSelect from "../formItems/FormSelect";
-import AddProductFormProvider from "./AddProductFormProvider";
 import FormTextArea from "../formItems/FormTextArea";
-import PrimaryButton from "@/components/buttons/PrimaryButton";
-import FormFile from "../formItems/FormFile";
+import AddProductFormProvider from "./AddProductFormProvider";
 
 const AddProductForm = () => {
   return (
@@ -56,7 +56,7 @@ const AddProductForm = () => {
           />
         </div>
         <div className="mt-6 ">
-          <PrimaryButton type="submit" buttonText="Add Product" />
+          <SecondaryFilledButton type="submit" buttonText="Add Product" />
         </div>
       </div>
     </AddProductFormProvider>

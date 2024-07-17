@@ -1,10 +1,10 @@
-import { TProduct } from "@/types/product.types";
-import UpdateProductFormProvider from "./UpdateProductFormProvider";
-import FormInput from "../formItems/FormInput";
-import FormTextArea from "../formItems/FormTextArea";
-import PrimaryButton from "@/components/buttons/PrimaryButton";
-import FormSelect from "../formItems/FormSelect";
+import SecondaryFilledButton from "@/components/buttons/SecondaryButton";
 import { productBrandList } from "@/constant/product.constant";
+import { TProduct } from "@/types/product.types";
+import FormInput from "../formItems/FormInput";
+import FormSelect from "../formItems/FormSelect";
+import FormTextArea from "../formItems/FormTextArea";
+import UpdateProductFormProvider from "./UpdateProductFormProvider";
 
 const UpdateProductForm = ({ product }: { product: TProduct }) => {
   return (
@@ -52,7 +52,7 @@ const UpdateProductForm = ({ product }: { product: TProduct }) => {
         />
       </div>
       <div className="mt-6 float-end">
-        <PrimaryButton type="submit" buttonText="Update Now" />
+        <SecondaryFilledButton type="submit" buttonText="Update Now" />
       </div>
     </UpdateProductFormProvider>
   );

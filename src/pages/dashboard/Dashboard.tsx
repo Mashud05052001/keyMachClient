@@ -7,6 +7,7 @@ const Dashboard = () => {
   return (
     <CommonMarginTopContainer>
       <Tabs defaultValue="allProducts" className="">
+        {/* Dashboard TAB Header */}
         <TabsList className="mx-auto w-full bg-transparent">
           <div className=" rounded-md px-4 py-3 border-b-2 shadow-sm">
             <TabsTrigger
@@ -24,6 +25,7 @@ const Dashboard = () => {
             </TabsTrigger>
           </div>
         </TabsList>
+        {/* Dashboard TAB Body */}
         <TabsContent value="allProducts" defaultChecked={true}>
           <AllProductsDuplicate />
           {/* <AllProducts /> */}

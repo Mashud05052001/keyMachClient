@@ -24,6 +24,7 @@ const ProductsAllCarts = ({
       </div>
     );
   }
+
   return (
     <>
       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5">

@@ -36,6 +36,7 @@ import {
   TProductSearchQuery,
   TProductSearchQueryLimit,
 } from "@/types/product.types";
+import LoadingSpinner from "@/components/loading/LoadingSpinner";
 
 type TTable = {
   data: TProduct[];
@@ -95,7 +96,7 @@ const ProductsTable = ({
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner />;
   }
 
   return (

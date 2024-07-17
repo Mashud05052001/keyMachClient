@@ -5,10 +5,10 @@ import PrimaryButton from "../buttons/PrimaryButton";
 
 const ProductCart = ({ product }: { product: TProduct }) => {
   return (
-    <div className="max-[300px] space-y-6 rounded-lg bg-slate-100/70 p-3 shadow-md">
+    <div className="max-w-[300px] space-y-6 rounded-lg bg-gray-100/50 p-3 shadow-md mx-auto">
       {/* Card Image */}
       <img
-        className="h-[190px] w-full rounded-lg bg-gray-400"
+        className="h-[190px] w-full rounded-lg"
         src={product?.image}
         alt="card navigate ui"
       />

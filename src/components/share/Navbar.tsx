@@ -31,7 +31,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="flex items-center justify-between bg-gray py-2 text-black-600 bg-common-100">
+    <nav className="flex items-center justify-between bg-gray py-2 text-black-600 ">
       {/* Logo */}
       <NavLink to={""}>
         <div className="scale-100 cursor-pointer rounded-2xl px-3 py-2 font-semibold text-black-700 transition-all duration-200 hover:scale-110">

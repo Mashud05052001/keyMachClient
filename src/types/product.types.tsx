@@ -41,6 +41,13 @@ export type TProductSearchQuery = {
   limit?: TProductSearchQueryLimit;
   page?: number;
 };
+export type TProductSearchQueryWithRandomNumber = {
+  searchTerm?: string;
+  filter?: string;
+  sort?: string;
+  limit?: number;
+  page?: number;
+};
 
 export type TProductSearchQueryLimit = 5 | 10 | 15 | 20 | 30 | 40 | 50;
 export const productSelectList: TProductSearchQueryLimit[] = [

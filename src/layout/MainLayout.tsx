@@ -1,6 +1,11 @@
 import MainContainer from "@/components/container/MainContainer";
 import Navbar from "@/components/share/Navbar";
 import { Outlet } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import CommonBigMarginContainer from "@/components/container/CommonBigMarginContainer";
+import Footer from "@/components/share/Footer";
+AOS.init();
 
 const MainLayout = () => {
   // const noOfCartItems = useAppSelector(
@@ -22,10 +27,17 @@ const MainLayout = () => {
   //   };
   // });
   return (
-    <MainContainer>
-      <Navbar />
-      <Outlet />
-    </MainContainer>
+    <div>
+      <MainContainer>
+        <Navbar />
+        <div className="min-h-[80vh]">
+          <Outlet />
+        </div>
+      </MainContainer>
+      <CommonBigMarginContainer>
+        <Footer />
+      </CommonBigMarginContainer>
+    </div>
   );
 };
 

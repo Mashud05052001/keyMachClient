@@ -1,4 +1,6 @@
-export const frequentAskQuestion = [
+import { TAccordian } from "@/types/order.types";
+
+export const frequentAskQuestion: TAccordian[] = [
   {
     id: 1,
     question: "Keyboard Quality",
