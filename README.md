@@ -54,7 +54,7 @@ npm install
 - Setup Environment Variables
 
 ``` bash
-VITE_NODE_DEV= "developmenr" or "production"
+VITE_NODE_DEV= "development" or "production"
 VITE_IMG_BB_URL= put_here_imageBB_url_link_here
 
 ```
