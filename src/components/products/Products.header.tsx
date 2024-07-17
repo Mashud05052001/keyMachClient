@@ -7,11 +7,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import "@/styles/customSelect.style.css";
+import { TProductSearchQuery } from "@/types/product.types";
 import { AdjustmentsVerticalIcon } from "@heroicons/react/24/outline";
 import React, { Dispatch, SetStateAction } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import PrimaryButton from "../buttons/PrimaryButton";
-import { TProductSearchQuery } from "@/types/product.types";
 import SecondaryFilledButton from "../buttons/SecondaryButton";
 
 type TFilter = {
@@ -76,7 +75,7 @@ const ProductsHeaderSection = ({
 
   return (
     <div className="pl-3">
-      <div className="flex justify-end sm:justify-between relative ">
+      <div className="flex  justify-end sm:justify-between items-center relative ">
         {/* Count of products */}
         <div className="hidden sm:block">
           <h3 className="text-lg font-semibold">
@@ -168,13 +167,13 @@ const ProductsHeaderSection = ({
                   </div>
                 </div>
                 <div className="space-x-4 mt-3">
-                  <PrimaryButton
+                  <SecondaryFilledButton
                     type="submit"
                     buttonText="Filter"
                     className="px-8"
                   />
                   <span onClick={handleResetFilter}>
-                    <PrimaryButton
+                    <SecondaryFilledButton
                       type="reset"
                       buttonText="Reset"
                       className="px-8 bg-gray-700/80 hover:bg-gray-700"
@@ -193,14 +192,6 @@ const ProductsHeaderSection = ({
           <span className="text-common-600">{totalProducts}</span>
         </h3>
       </div>
-      {totalProducts === 0 && (
-        <div className="mt-12">
-          {" "}
-          <h1 className="text-common-600 text-3xl font-semibold">
-            No Products Available
-          </h1>
-        </div>
-      )}
     </div>
   );
 };

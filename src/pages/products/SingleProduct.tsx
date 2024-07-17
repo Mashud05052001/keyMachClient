@@ -1,4 +1,4 @@
-import PrimaryButton from "@/components/buttons/PrimaryButton";
+import SecondaryFilledButton from "@/components/buttons/SecondaryButton";
 import CommonMarginTopContainer from "@/components/container/CommonMarginTopContainer";
 import PermitModal from "@/components/modal/PermitModal";
 
@@ -12,7 +12,6 @@ import ReactStarsRating from "react-awesome-stars-rating";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 
-// TODO : If already previous available & now item is more than the quantity then gives an error
 const SingleProduct = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -100,10 +99,10 @@ const SingleProduct = () => {
               permitButtonText="ADD"
               permitButtonHandler={handleAddTOCart}
             >
-              <PrimaryButton
+              <SecondaryFilledButton
                 buttonText="Add To Cart"
                 disabled={productData?.quantity === 0}
-              ></PrimaryButton>
+              ></SecondaryFilledButton>
             </PermitModal>
           </div>
         </div>

@@ -25,6 +25,17 @@ const ProductsAllCarts = ({
     );
   }
 
+  if (allProducts.length === 0) {
+    return (
+      <div className="mt-12">
+        {" "}
+        <h1 className="text-common-600 text-3xl font-semibold pl-3">
+          No Products Available
+        </h1>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5">

@@ -5,27 +5,30 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import CommonBigMarginContainer from "@/components/container/CommonBigMarginContainer";
 import Footer from "@/components/share/Footer";
+import { useAppSelector } from "@/redux/hooks";
+import { RootState } from "@/redux/store";
+import { useEffect } from "react";
 AOS.init();
 
 const MainLayout = () => {
-  // const noOfCartItems = useAppSelector(
-  //   (state: RootState) => state.carts.totalCartItems
-  // );
-  // TODO : Implemented it before submission
-  // useEffect(() => {
-  //   const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-  //     if (noOfCartItems > 0) {
-  //       const confirmMessage = "By reloading, cart items may be removed.";
-  //       e.returnValue = confirmMessage;
-  //       return confirmMessage;
-  //     }
-  //   };
+  const noOfCartItems = useAppSelector(
+    (state: RootState) => state.carts.totalCartItems
+  );
 
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // });
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (noOfCartItems > 0) {
+        const confirmMessage = "By reloading, cart items may be removed.";
+        e.returnValue = confirmMessage;
+        return confirmMessage;
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  });
   return (
     <div>
       <MainContainer>

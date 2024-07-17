@@ -20,10 +20,8 @@ const Products = () => {
     totalProductsCount = totalProductsResponse?.data;
   }
   let allProducts: TProduct[] = [];
-  let currentPageProductsCount = 0;
   if (data?.success) {
     allProducts = data?.data;
-    currentPageProductsCount = data?.data?.length;
   }
 
   useEffect(() => {
@@ -42,7 +40,7 @@ const Products = () => {
         setQuery={setQuery}
         totalProducts={countOfProducts}
       />
-      <CommonMarginTopContainer>
+      <CommonMarginTopContainer className="min-h-[60vh]">
         <ProductsAllCarts
           allProducts={allProducts}
           isLoading={isLoading}
